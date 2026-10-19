@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Master Worship Hub & Mood Du'a Jar</title>
+    <style>
+        /* Premium Dyslexia & ADHD-Friendly Dark Theme Palette inspired by Quwa */
+        :root {
+            --bg-main: #121214;
+            --bg-card: #1c1c1f;
+            --text-main: #f4f4f6;
+            --text-muted: #a0a0a5;
+            
+            /* High-Contrast Dyslexia-Friendly Pastel Border Accents */
+            --border-core: #9cd4c3;     /* Bright Mint Sage Green for Unified Prophetic Core */
+            --border-madhab: #b3c5f5;   /* Crisp Periwinkle Blue for School Choices */
+            --border-sunnah: #d1b6ff;   /* Vibrant Soft Lavender for Sunnah Additions */
+            
+            /* High-contrast Matte Pastel Card Backgrounds for Moods */
+            --mood-anxious: #ff9e93;    /* Soft Terracotta Salmon (Charcoal Text) */
+            --mood-sad: #9ee6cf;        /* Deep Sage Mint (Charcoal Text) */
+            --mood-angry: #d7c4ff;      /* Muted Lavender-Grey (Charcoal Text) */
+            --mood-grateful: #ffe3b3;   /* Warm Buttercream Sand (Charcoal Text) */
+            --mood-confused: #b2e3ff;   /* Soft Matte Sky Blue (Charcoal Text) */
+            --mood-jealous: #ffbfe0;    /* Muted Pastel Rose (Charcoal Text) */
+            --mood-text: #1a1a1c;
+            
+            /* Educational Sandbox Drawer Container styling */
+            --bg-context: #f5f2eb;      
+            --text-context: #2d2d30;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Open Dyslexic', 'Segoe UI', Arial, sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            text-align: center;
+            border-bottom: 3px solid var(--border-core);
+            padding-bottom: 15px;
+            color: var(--border-core);
+            font-size: 2.2rem;
+        }
+
+        /* Module Navigation Tabs Control Bar */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 2px solid var(--text-muted);
+            padding: 14px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--bg-main);
+            border-color: var(--border-sunnah);
+            color: var(--border-sunnah);
+            box-shadow: 0 0 12px rgba(179, 157, 219, 0.4);
+        }
+
+        /* Module Panels Visibility Controls */
+        .content-panel {
+            display: none;
+            background-color: var(--bg-card);
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        /* Control Input Configuration Grid */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        select {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 2px solid var(--border-madhab);
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* High Contrast Dyslexia Layout Card Types */
+        .card-core {
+            border-left: 8px solid var(--border-core);
+            background: rgba(156, 212, 195, 0.07);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .card-madhab {
+            border-left: 8px solid var(--border-madhab);
+            background: rgba(179, 197, 245, 0.07);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .card-sunnah {
+            border-left: 8px solid var(--border-sunnah);
+            background: rgba(209, 182, 255, 0.07);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .drawer-context {
+            background-color: var(--bg-context);
+            color: var(--text-context);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1rem;
+            border-left: 8px solid #d4be96;
+            line-height: 1.6;
+        }
+
+        /* Word-for-Word Interlinear Data Mapping Grid Layouts */
+        .interlinear-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            direction: rtl; /* Reads Arabic right-to-left layout neatly */
+        }
+
+        .word-alignment-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            direction: ltr; /* Keeps individual target explanations left-to-right */
+            background: rgba(255,255,255,0.02);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .arabic-script {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .tajweed-translit {
+            font-size: 0.95rem;
+            color: var(--border-sunnah);
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .word-meaning {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .sentence-translation-box {
+            background: rgba(255,255,255,0.04);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid var(--border-sunnah);
+        }
+
+        /* Jar Container Mood Cards Grid */
+        .mood-card-output {
+            color: var(--mood-text);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* 99 Names Grid View Parameters */
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .name-card {
+            background: var(--bg-main);
+            border: 2px solid var(--border-core);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .name-card:hover {
+            border-color: var(--border-sunnah);
+            transform: translateY(-3px);
+        }
+
+        /* Multi-school Zakat Input styling */
+        .zakat-calc-box {
+            display: grid;
+            gap: 20px;
+            background: rgba(0,0,0,0.25);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        input[type="number"] {
+            background: var(--bg-main);
+            color: var(--text-main);
+            border: 2px solid var(--text-muted);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--border-sunnah);
+            outline: none;
+        }
+
+        .total-display {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--border-core);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="header-title">🕋 The Complete Worship Hub & Mood Du'a Jar</h1>
+    
+    <!-- Top Modular App Tab Bars -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('salah-tab')">2000% Worship Matrix</button>
+        <button class="tab-btn" onclick="switchTab('dua-tab')">🏺 Emotional Du'a Jar</button>
+        <button class="tab-btn" onclick="switchTab('names-tab')">✨ 99 Names (Kids)</button>
+        <button class="tab-btn" onclick="switchTab('zakat-tab')">💰 Multi-School Zakat</button>
+        <button class="tab-btn" onclick="switchTab('fasting-tab')">📅 Sunnah Fasting</button>
+    </div>
+
+    <!-- MODULE 1: SALAH MATRIX CONTENT -->
+    <div id="salah-tab" class="content-panel active">
+        <h2>Interactive Salah Architecture</h2>
+        <p>Explore unified foundations and detailed school-of-thought settings across ten distinct types of prayers.</p>
+        
+        <div class="controls-grid">
+            <div class="input-group">
+                <label>Select Prayer Type:</label>
+                <select id="salah-select" onchange="updateSalahData()">
+                    <option value="fajr">Fajr (Dawn Prayer)</option>
+                    <option value="witr">Witr (The Night's Seal)</option>
+                    <option value="kusoof">Salat al-Kusoof (Anxiety/Eclipse)</option>
+                    <option value="istisqa">Salat al-Istisqa (Rain Crisis)</option>
+                    
